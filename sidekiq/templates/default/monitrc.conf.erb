@@ -1,5 +1,5 @@
 check process <%= @process_name %>
   with pidfile <%= @path %>/shared/pids/<%= @process_name %>.pid
-  start program = "/bin/su -c 'cd <%= @path %>/current; PATH=/usr/local/bin:$PATH bundle exec sidekiq -c 4 -e <%= @env %> -d -P <%= @path %>/shared/pids/<%= @process_name %>.pid -L log/sidekiq.log' <%= @user %>" with timeout 90 seconds
+  start program = "/bin/su -c 'cd <%= @path %>/current; PATH=/usr/local/bin:$PATH bundle exec sidekiq -e <%= @env %> -d -P <%= @path %>/shared/pids/<%= @process_name %>.pid -L log/sidekiq.log' <%= @user %>" with timeout 90 seconds
   stop program = "/bin/su -c 'cd <%= @path %>/current; PATH=/usr/local/bin:$PATH bundle exec sidekiqctl stop <%= @path %>/shared/pids/<%= @process_name %>.pid 30' <%= @user %>" with timeout 180 seconds
   group <%= @process_name %>
